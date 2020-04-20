@@ -1,0 +1,12 @@
+README.md
+setup.py
+tbsdq/__init__.py
+tbsdq/configuration.py
+tbsdq/data_quality.py
+tbsdq/utilities.py
+tbsdq/validation.py
+tbsdq.egg-info/PKG-INFO
+tbsdq.egg-info/SOURCES.txt
+tbsdq.egg-info/dependency_links.txt
+tbsdq.egg-info/requires.txt
+tbsdq.egg-info/top_level.txt
