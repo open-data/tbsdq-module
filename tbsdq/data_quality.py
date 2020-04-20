@@ -3,9 +3,9 @@ import pandas as pd
 from pandas import Panel
 from goodtables import validate
 from tqdm.auto import tqdm
-from tbsdq.tbsdq import configuration as dqconfig
-from tbsdq.tbsdq import utilities as dqutils
-from tbsdq.tbsdq import validation as dqvalidate
+from tbsdq import configuration as dqconfig
+from tbsdq import utilities as dqutils
+from tbsdq import validation as dqvalidate
 
 
 """ 

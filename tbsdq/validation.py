@@ -1,7 +1,7 @@
 from validate_email import validate_email
 from datetime import datetime
 from textstat.textstat import textstat
-from tbsdq.tbsdq import configuration as dqconfig
+from tbsdq import configuration as dqconfig
 
 # Inspect the provided maintainer email and don't count the default @tbs email 
 # addresses unless the owning organization is actually TBS
@@ -46,7 +46,7 @@ def validate_update_frequency(frequency, resource_modified, metadata_modified):
         try:
             return frequency_date_check(resource_modified, metadata_modified, max_days_since_update)
         except:
-            print('Unable to parse last modified date which was specified as: {0} AND '.format(resource_modified, metadata_modified))
+            print('Unable to parse last modified date which was specified as: {0} AND {1}'.format(resource_modified, metadata_modified))
             return 0
 
 # Run the supplied string through the Flesch-Kincaid readability grade test
