@@ -34,7 +34,7 @@ def run_common_validation(df_quality):
     df_quality['valid_file_type'] = df_quality.apply(lambda x: dqvalidate.validate_file_type(dqutils.get_filename_from_url(x['url']).split('.')[-1].lower(), x['source_format'].lower(), x['valid_url']), axis=1)
     df_quality['valid_encoding'] = df_quality['goodtables_report'].apply(lambda x: dqvalidate.gt_validate_encoding(x))
     df_quality['valid_format'] = df_quality['goodtables_report'].apply(lambda x: dqvalidate.gt_validate_format(x))
-
+    print('>> Finished Goodtables Evaluation')
     return df_quality
 
 def run_topN_validation(df_target, cat_zip, cat_file):
@@ -111,7 +111,8 @@ def dq_validate(source, exec_mode):
     if exec_mode == 'single':
         try:
             df_results = run_common_validation(pd.DataFrame([source]))
-        except:
+        except Exception as e:
+            print(e)
             raise Exception('When using single mode, description_en, description_fr, owner_org. maintainer_email, url, and format are all required and must be passed in as a dictionary.  Please adjust your input and try again')
     elif exec_mode == 'csv':
         try:
@@ -121,7 +122,8 @@ def dq_validate(source, exec_mode):
         
         try:
             df_results = run_common_validation(df_csv)
-        except:
+        except Exception as e:
+            print(e)
             raise Exception('There was a problem validating the provided CSV file.  Please ensure that description_en, description_fr, owner_org. maintainer_email, url, and format are all included as headers in your CSV and try again.')
     else:
         raise Exception('Invalid mode specified.  Please specificy single or csv and try again')
