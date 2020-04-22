@@ -110,7 +110,7 @@ def run_topN_validation(df_target, cat_zip, cat_file):
 def dq_validate(source, exec_mode):
     if exec_mode == 'single':
         try:
-            df_results = run_common_validation(pd.DataFrame(source))
+            df_results = run_common_validation(pd.DataFrame([source]))
         except:
             raise Exception('When using single mode, description_en, description_fr, owner_org. maintainer_email, url, and format are all required and must be passed in as a dictionary.  Please adjust your input and try again')
     elif exec_mode == 'csv':
