@@ -29,11 +29,15 @@ def run_common_validation(df_quality):
     print('>> Starting Goodtables Evaluation')
     #TODO: Investigate goodtables batch processing
     tqdm.pandas(desc="Goodtables Validation Progress")
-    df_quality['goodtables_report'] = df_quality['url'].progress_apply(lambda x: validate(x))
-    df_quality['valid_url'] = df_quality['goodtables_report'].apply(lambda x: dqvalidate.gt_validate_url(x))
-    df_quality['valid_file_type'] = df_quality.apply(lambda x: dqvalidate.validate_file_type(dqutils.get_filename_from_url(x['url']).split('.')[-1].lower(), x['source_format'].lower(), x['valid_url']), axis=1)
-    df_quality['valid_encoding'] = df_quality['goodtables_report'].apply(lambda x: dqvalidate.gt_validate_encoding(x))
-    df_quality['valid_format'] = df_quality['goodtables_report'].apply(lambda x: dqvalidate.gt_validate_format(x))
+    try:
+        df_quality['goodtables_report'] = df_quality['url'].progress_apply(lambda x: validate(x))
+        df_quality['valid_url'] = df_quality['goodtables_report'].apply(lambda x: dqvalidate.gt_validate_url(x))
+        df_quality['valid_file_type'] = df_quality.apply(lambda x: dqvalidate.validate_file_type(dqutils.get_filename_from_url(x['url']).split('.')[-1].lower(), x['source_format'].lower(), x['valid_url']), axis=1)
+        df_quality['valid_encoding'] = df_quality['goodtables_report'].apply(lambda x: dqvalidate.gt_validate_encoding(x))
+        df_quality['valid_format'] = df_quality['goodtables_report'].apply(lambda x: dqvalidate.gt_validate_format(x))
+    except Exception as e:
+        print(e)
+
     print('>> Finished Goodtables Evaluation')
     return df_quality
 
