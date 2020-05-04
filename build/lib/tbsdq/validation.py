@@ -75,6 +75,12 @@ def gt_validate_encoding(gt_report):
     except:
         return 0
 
+def gt_get_encoding(gt_report):
+    try:
+        return gt_report['tables'][0]['encoding']
+    except:
+        return 'unknown'
+
 # The goodtables report will evaluate CSV/XLS/JSON files to ensure they're valid
 def gt_validate_format(gt_report):
     try:

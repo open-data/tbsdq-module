@@ -32,9 +32,9 @@ def run_common_validation(df_quality):
     df_quality['goodtables_report'] = df_quality['url'].progress_apply(lambda x: validate(x))
     df_quality['valid_url'] = df_quality['goodtables_report'].apply(lambda x: dqvalidate.gt_validate_url(x))
     df_quality['valid_file_type'] = df_quality.apply(lambda x: dqvalidate.validate_file_type(dqutils.get_filename_from_url(x['url']).split('.')[-1].lower(), x['source_format'].lower(), x['valid_url']), axis=1)
+    df_quality['detected_encoding'] = df_quality['goodtables_report'].apply(lambda x: dqvalidate.gt_get_encoding(x))
     df_quality['valid_encoding'] = df_quality['goodtables_report'].apply(lambda x: dqvalidate.gt_validate_encoding(x))
     df_quality['valid_format'] = df_quality['goodtables_report'].apply(lambda x: dqvalidate.gt_validate_format(x))
-    print('>> Finished Goodtables Evaluation')
     return df_quality
 
 def run_topN_validation(df_target, cat_zip, cat_file):
@@ -101,7 +101,7 @@ def run_topN_validation(df_target, cat_zip, cat_file):
     df_quality = df_quality[['id', 'resource_id', 'date_published', 'date_modified', 'frequency', 'owner_org', 'maintainer_email', 'metadata_created', \
         'metadata_modified', 'description_en', 'description_fr', 'source_format', 'resource_type', 'created', 'last_modified', 'url', 'url_type', \
         'readability_grade_en', 'readability_grade_fr', 'valid_readability_en', 'valid_readability_fr', 'valid_maintainer_email', \
-        'valid_update_frequency', 'valid_supporting_docs', 'valid_file_type', 'valid_url', 'valid_encoding', 'valid_format', \
+        'valid_update_frequency', 'valid_supporting_docs', 'valid_file_type', 'valid_url', 'detected_encoding', 'valid_encoding', 'valid_format', \
         'metadata_quality', 'resource_quality', 'metadata_quality_min', 'resource_quality_min', 'metadata_quality_max', 'resource_quality_max', \
         'metadata_quality_avg', 'resource_quality_avg', 'metadata_quality_latest', 'resource_quality_latest']]
 
@@ -111,22 +111,19 @@ def dq_validate(source, exec_mode):
     if exec_mode == 'single':
         try:
             df_results = run_common_validation(pd.DataFrame([source]))
-        except Exception as e:
-            print(e)
+        except:
             raise Exception('When using single mode, description_en, description_fr, owner_org. maintainer_email, url, and format are all required and must be passed in as a dictionary.  Please adjust your input and try again')
     elif exec_mode == 'csv':
         try:
             df_csv = pd.read_csv(source, encoding=dqconfig.encoding_type)
-        except Exception as e:
-            print(e)
+        except:
             raise Exception('Unable to read the specified CSV file.  Please check your path and try again')
         
         try:
             df_results = run_common_validation(df_csv)
-        except Exception as e:
-            print(e)
+        except:
             raise Exception('There was a problem validating the provided CSV file.  Please ensure that description_en, description_fr, owner_org. maintainer_email, url, and format are all included as headers in your CSV and try again.')
     else:
         raise Exception('Invalid mode specified.  Please specificy single or csv and try again')
 
-    return df_results
+    return df_results.to_csv()
