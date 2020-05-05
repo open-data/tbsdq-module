@@ -4,6 +4,7 @@ import requests, zipfile, gzip, io, json
 from tbsdq import configuration as dqconfig
 
 def get_and_extract_zip(zip_url):
+    # Attempts to retrieve a zip file from a URL and extract it
     try:
         r = requests.get(zip_url)
         z = zipfile.ZipFile(io.BytesIO(r.content))
@@ -13,6 +14,7 @@ def get_and_extract_zip(zip_url):
         pass
 
 def get_and_extract_gzip(zip_url, output_file):
+    # Attempts to retrieve a GZIP file from a URL and extract it
     gzip_name = zip_url.split('/')[-1]
     try:
         r = requests.get(zip_url)
@@ -49,6 +51,7 @@ def fetch_zipped_csv(zip_url, expected_file):
     return df
 
 def get_filename_from_url(url):
+    # Extracts and returns the text after the last '/' in a URL converted to lower case
     return url.split('/')[-1].lower()
 
 def excel_delete_and_merge_tabs(excel_file, tab_names):
@@ -65,8 +68,8 @@ def excel_delete_and_merge_tabs(excel_file, tab_names):
     df_list = [v for k,v in data_wb.items()] 
     return pd.concat(df_list, axis=0)
 
-# Attempt to download the gzipped data catalogue, decompress, and parse out the required information.  
-# If we fail to download and extract the gzip and a local copy exists, the script will still run
+# Attempts to download the gzipped data catalogue, decompress, and parse out the required information.  
+# If it fails to download and extract the gzip and a local copy exists, the script will still run
 def fetch_and_parse_catalogue(zip_url, expected_file):
     df = pd.DataFrame()
     datasets = []

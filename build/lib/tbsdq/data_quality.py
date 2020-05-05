@@ -47,6 +47,9 @@ def run_topN_validation(df_target, cat_zip, cat_file):
     df_top200 = df_target
     df_quality = pd.merge(left=df_top200, right=df_catalogue, left_on='id', right_on='package_id')
 
+    # Calculate the Data Quality Metrics
+    print('Calculating Data Quality Metrics')
+
     # Supporting Documentation
     print('>> Starting Supporting Documentation Tests')
     df_supporting_docs = df_quality.loc[df_quality['resource_type'].isin(dqconfig.supporting_documentation_resource_types)]
@@ -69,9 +72,6 @@ def run_topN_validation(df_target, cat_zip, cat_file):
     df_quality['valid_update_frequency'] = df_quality['valid_update_frequency_max']
 
     df_quality = run_common_validation(df_quality)
-
-    # Calculate the Data Quality Metrics for our Top 200 datasets
-    print('Calculating Data Quality Metrics')
 
     # Add the metadata and resource quality scores as standalone fields
     print('>> Getting averages and maximums')
@@ -108,11 +108,13 @@ def run_topN_validation(df_target, cat_zip, cat_file):
     return df_quality
 
 def dq_validate(source, exec_mode):
+    # Single mode should have all required parameters passed in via command line
     if exec_mode == 'single':
         try:
             df_results = run_common_validation(pd.DataFrame([source]))
         except:
             raise Exception('When using single mode, description_en, description_fr, owner_org. maintainer_email, url, and format are all required and must be passed in as a dictionary.  Please adjust your input and try again')
+    # CSV mode expects an input file that has all required parameters as column headers and all datasets to be validated as individual rows
     elif exec_mode == 'csv':
         try:
             df_csv = pd.read_csv(source, encoding=dqconfig.encoding_type)
