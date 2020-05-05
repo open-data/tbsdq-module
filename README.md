@@ -1,6 +1,46 @@
 # TBS Data Quality
 This module adds reusable Data Quality components for Python based projects based on the Data Quality metrics defined by the Treasury Board Secretariat for the Goverment of Canada's Open Data portal.
 
+* [Metadata Quality Metrics](#metadata-quality)
+* [Resource Quality Metrics](#resource-quality)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Sample Project](#sample-project)
+
+## Metrics
+This module calculates which achievements a particular dataset should be awarded.  The metrics are broken up into two categories: Metadata Quality and Resource Quality.
+
+### Metadata Quality
+
+> #### Timely
+> The Timely achievement is awarded if an update to the data has occured within the frequency specified during initial publishing.  > There is a 25% grace period applied to each interval within which a point will still be awarded even in the absence of an update.  > For example, if the specified update frequency is hourly, then the dataset must be updated within 75 minutes of the last update in > order to maintain this achievement.
+> 
+> There are a handful of update frequencies that cannot be evaluated effectively that will automatically be awarded this achievement > (e.g. 'as needed', 'irregular', 'unknown').
+
+> #### Literate
+> The Literate achievement is awarded if any valid supporting documentation is supplied alongside the data in the package.  Supporting >documentation is any file tagged as a 'guide', 'terminology', 'faq', 'publication', 'plan', or 'specification'.  The achievement is >awarded once per package and multiple points will not be awarded if multiple supporting documents are supplied.
+
+> #### Connected
+> The Connected achievement is awarded if a valid maintainer email address is supplied with the dataset.  Datasets belonging to > departments outside of TBS using the open@tbs-sct.gc.ca email address will not be awarded this achievement.  Publishers are > encouraged to create and maintain their own central inbox for their department's open data.
+
+> #### Communicator
+> The Communicator achievement is awarded if the main package description is at or below an appropriate readability level.  There is a separate achievement for French and for English so two Communicator achievements can be earned for each package.  Readability is calculated using the Flesch-Kincaid readability scale and descriptions at or below grade 8 will be awarded this achievement.
+
+
+### Resource Quality
+
+> #### Participation
+> The Participation achievement is awarded if the provided link to the dataset is valid (i.e. returns a valid HTTP status and not 404, 500, 503, etc.)
+
+> #### Tidy
+> The Tidy achievement is awarded if the dataset is successfully validated via a linting tool and returns no errors.
+
+> #### Honest
+> The Honest achievement is awarded if the supplied data file matches the indicated file type.  For example, if a dataset is specified as being a CSV file when published, the link should return a CSV file and not a ZIP.
+
+> #### International
+> The International achievement is awarded if the dataset is supplied with UTF-8 character encoding.
+
 ## Installation
 During initial development, you will need to install this module from this github repository.
 
@@ -81,6 +121,3 @@ If you've got multiple datasets that you want to validate, you can execute the `
 
 ## Sample Project
 The Data Quality project uses this module for both a command-line interface and a simple web form and API to deliver data quality evaluations to users.  You can see that project here: https://github.com/open-data/data
-
-
-
