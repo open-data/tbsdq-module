@@ -128,4 +128,4 @@ def dq_validate(source, exec_mode):
     else:
         raise Exception('Invalid mode specified.  Please specificy single or csv and try again')
 
-    return df_results.to_csv()
+    return df_results

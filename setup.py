@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tbsdq",
-    version="0.0.2",
+    version="0.0.3",
     author="Mike Sisk",
     author_email="Mike.Sisk@tbs-sct.gc.ca",
     description="A library for calculating specific data quality metrics on open data",
