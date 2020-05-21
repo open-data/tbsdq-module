@@ -47,12 +47,12 @@ During initial development, you will need to install this module from this githu
 ### Pip Install
 To add this to a project, execute the following command in your virtual environment:
     
-    pip install git+https://github.com/msisktbs/tbsdq-module
+    pip install git+https://github.com/open-data/tbsdq-module
 
 ### Adding to requirements.txt
 To add this to your requirements.txt, add the following entry:
     
-    git+git://github.com/msisktbs/tbsdq-module
+    git+git://github.com/open-data/tbsdq-module
 
 ## Usage
 Once installed, add the following import to your python file:

@@ -1,8 +1,8 @@
 Metadata-Version: 2.1
 Name: tbsdq
-Version: 0.0.3
+Version: 0.0.4
 Summary: A library for calculating specific data quality metrics on open data
-Home-page: https://github.com/msisktbs/tbsdq-module
+Home-page: https://github.com/open-data/tbsdq-module
 Author: Mike Sisk
 Author-email: Mike.Sisk@tbs-sct.gc.ca
 License: UNKNOWN
@@ -55,12 +55,12 @@ Description: # TBS Data Quality
         ### Pip Install
         To add this to a project, execute the following command in your virtual environment:
             
-            pip install git+https://github.com/msisktbs/tbsdq-module
+            pip install git+https://github.com/open-data/tbsdq-module
         
         ### Adding to requirements.txt
         To add this to your requirements.txt, add the following entry:
             
-            git+git://github.com/msisktbs/tbsdq-module
+            git+git://github.com/open-data/tbsdq-module
         
         ## Usage
         Once installed, add the following import to your python file:

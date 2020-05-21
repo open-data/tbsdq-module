@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tbsdq",
-    version="0.0.3",
+    version="0.0.4",
     author="Mike Sisk",
     author_email="Mike.Sisk@tbs-sct.gc.ca",
     description="A library for calculating specific data quality metrics on open data",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/msisktbs/tbsdq-module",
+    url="https://github.com/open-data/tbsdq-module",
     packages=setuptools.find_packages(),
     install_requires=[
         'goodtables>=2.4.2',
