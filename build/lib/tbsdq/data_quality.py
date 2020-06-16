@@ -103,7 +103,7 @@ def run_topN_validation(df_target, cat_zip, cat_file):
         'readability_grade_en', 'readability_grade_fr', 'valid_readability_en', 'valid_readability_fr', 'valid_maintainer_email', \
         'valid_update_frequency', 'valid_supporting_docs', 'valid_file_type', 'valid_url', 'detected_encoding', 'valid_encoding', 'valid_format', \
         'metadata_quality', 'resource_quality', 'metadata_quality_min', 'resource_quality_min', 'metadata_quality_max', 'resource_quality_max', \
-        'metadata_quality_avg', 'resource_quality_avg', 'metadata_quality_latest', 'resource_quality_latest']]
+        'metadata_quality_avg', 'resource_quality_avg', 'metadata_quality_latest', 'resource_quality_latest', 'openness_rating', 'user_rating_score', 'user_rating_count']]
 
     return df_quality
 

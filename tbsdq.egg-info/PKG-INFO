@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: tbsdq
-Version: 0.0.4
+Version: 0.0.5
 Summary: A library for calculating specific data quality metrics on open data
 Home-page: https://github.com/open-data/tbsdq-module
 Author: Mike Sisk
